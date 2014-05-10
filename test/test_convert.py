@@ -36,7 +36,7 @@ def test_parse_01():
     assert_equal('7pairs', result[0]['author'])
     assert_equal('1つ目の記事', result[0]['title'])
     assert_equal('はてなダイアリー過去ログ', result[0]['category'])
-    assert_equal(datetime.date(2004, 7, 14), result[0]['date'])
+    assert_equal(datetime.datetime(2004, 7, 14, 0, 0, 0), result[0]['date'])
     assert_equal(textwrap.dedent("""\
         1つ目の記事1行目
         1つ目の記事2行目
