@@ -81,7 +81,7 @@ def test_create_mt_data_01():
         PRIMARY CATEGORY: はてなダイアリー過去ログ
         CATEGORY: はてなダイアリー過去ログ
 
-        DATE: 07/14/2004 00:00:00 PM
+        DATE: 07/14/2004 12:00:00 AM
         -----
         BODY:
         1つ目の記事1行目
