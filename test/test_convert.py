@@ -53,3 +53,53 @@ def test_parse_02():
     result = convert.parse(xml)
     assert_equal(2, len(result))
 
+
+def test_create_mt_data_01():
+    """
+    引数に辞書を指定したとき、MovableType形式の文字列を返すことを確認する。
+    """
+    data = [{
+        'author': '7pairs',
+        'title': '1つ目の記事',
+        'category': 'はてなダイアリー過去ログ',
+        'date': datetime.datetime(2004, 7, 14, 0, 0, 0),
+        'body': textwrap.dedent("""\
+            1つ目の記事1行目
+            1つ目の記事2行目
+            1つ目の記事3行目
+        """),
+    }]
+
+    expected = textwrap.dedent("""\
+        --------
+        AUTHOR: 7pairs
+        TITLE: 1つ目の記事
+        STATUS: publish
+        ALLOW COMMENTS: 0
+        CONVERT BREAKS: __default__
+        ALLOW PINGS: 0
+        PRIMARY CATEGORY: はてなダイアリー過去ログ
+        CATEGORY: はてなダイアリー過去ログ
+
+        DATE: 07/14/2004 00:00:00 PM
+        -----
+        BODY:
+        1つ目の記事1行目
+        1つ目の記事2行目
+        1つ目の記事3行目
+
+        -----
+        EXTENDED BODY:
+
+        -----
+        EXCERPT:
+
+        -----
+        KEYWORDS:
+
+        -----
+    """)
+
+    actual = convert.create_mt_data(data)
+    assert_equal(expected, actual)
+
