@@ -65,3 +65,52 @@ def parse(xml):
     # 構築したリストを返す
     return retval
 
+
+MT_TEMPLATE = """\
+--------
+AUTHOR: %(author)s
+TITLE: %(title)s
+STATUS: publish
+ALLOW COMMENTS: 0
+CONVERT BREAKS: __default__
+ALLOW PINGS: 0
+PRIMARY CATEGORY: %(category)s
+CATEGORY: %(category)s
+
+DATE: %(date)s
+-----
+BODY:
+%(body)s
+-----
+EXTENDED BODY:
+
+-----
+EXCERPT:
+
+-----
+KEYWORDS:
+
+-----
+"""
+
+
+def create_mt_data(data_list):
+    """
+    エントリ情報の格納されたリストをもとにMovableType形式のインポート文字列を構築する。
+
+    @param data: エントリ情報
+    @type data: list
+    @return: インポート文字列
+    @rtype: str
+    """
+    # 戻り値用
+    retval = ''
+
+    # MovableType形式に変換
+    for data in data_list:
+        data['date'] = data['date'].strftime('%m/%d/%Y %I:%M:%S %p')
+        retval += MT_TEMPLATE % data
+
+    # 構築した文字列を返す
+    return retval
+
