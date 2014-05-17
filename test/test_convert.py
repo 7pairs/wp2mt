@@ -122,3 +122,75 @@ def test_save_file():
 
     os.remove('./test.txt')
 
+
+def test_convert():
+    """
+    WordPress形式のファイルをMovableType形式に変換することを確認する。
+    """
+    convert.execute('./test/test_02.xml', './test.txt')
+
+    with open('./test.txt') as f:
+        actual = f.read()
+
+    expected = textwrap.dedent("""\
+        --------
+        AUTHOR: 7pairs
+        TITLE: 1つ目の記事
+        STATUS: publish
+        ALLOW COMMENTS: 0
+        CONVERT BREAKS: __default__
+        ALLOW PINGS: 0
+        PRIMARY CATEGORY: はてなダイアリー過去ログ
+        CATEGORY: はてなダイアリー過去ログ
+
+        DATE: 07/14/2004 12:00:00 AM
+        -----
+        BODY:
+        1つ目の記事1行目
+        1つ目の記事2行目
+        1つ目の記事3行目
+
+        -----
+        EXTENDED BODY:
+
+        -----
+        EXCERPT:
+
+        -----
+        KEYWORDS:
+
+        -----
+
+        --------
+        AUTHOR: 7pairs
+        TITLE: 2つ目の記事
+        STATUS: publish
+        ALLOW COMMENTS: 0
+        CONVERT BREAKS: __default__
+        ALLOW PINGS: 0
+        PRIMARY CATEGORY: はてなダイアリー過去ログ
+        CATEGORY: はてなダイアリー過去ログ
+
+        DATE: 07/15/2004 12:00:00 AM
+        -----
+        BODY:
+        2つ目の記事1行目
+        2つ目の記事2行目
+        2つ目の記事3行目
+
+        -----
+        EXTENDED BODY:
+
+        -----
+        EXCERPT:
+
+        -----
+        KEYWORDS:
+
+        -----
+    """)
+
+    assert_equal(data, actual)
+
+    os.remove('./test.txt')
+
