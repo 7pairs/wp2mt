@@ -103,3 +103,19 @@ def test_create_mt_data_01():
     actual = convert.create_mt_data(data)
     assert_equal(expected, actual)
 
+
+def test_save_file():
+    """
+    引数に文字列とファイル名を指定したとき、文字列の内容をファイルに保存することを確認する。
+    """
+    data = textwrap.dedent("""
+        保存する文字列アルよー。
+        これは2行目アルよー。
+    """)
+    convert.save_file('./test.txt', data)
+
+    with open('./test.txt') as f:
+        actual = f.read()
+
+    assert_equal(data, actual)
+
