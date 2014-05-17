@@ -114,3 +114,17 @@ def create_mt_data(data_list):
     # 構築した文字列を返す
     return retval
 
+
+def save_file(file_name, data):
+    """
+    文字列をファイルに保存する。
+
+    @param file_name: ファイルパス
+    @type file_name: str
+    @param data: 保存する文字列
+    @type data: str
+    """
+    # 文字列をファイルに保存
+    with open(file_name, 'w') as f:
+        f.write(data)
+
