@@ -72,7 +72,6 @@ def test_create_mt_data_01():
     }]
 
     expected = textwrap.dedent("""\
-        --------
         AUTHOR: 7pairs
         TITLE: 1つ目の記事
         STATUS: publish
@@ -136,7 +135,6 @@ def test_convert():
         actual = f.read()
 
     expected = textwrap.dedent("""\
-        --------
         AUTHOR: 7pairs
         TITLE: 1つ目の記事
         STATUS: publish
