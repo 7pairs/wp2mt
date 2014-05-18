@@ -10,6 +10,22 @@ except ImportError:
     from exception import ParseError
 
 
+def execute(in_file, out_file):
+    """
+    WordPress形式のXMLをMovableType形式に変換する。
+
+    @param in_file: WordPress形式ファイルのパス
+    @type in_file: str
+    @param out_file: MovableType形式ファイルのパス
+    @type out_file: str
+    """
+    # MovableType形式のテキストファイルを生成
+    xml = get_xml(in_file)
+    entries = parse(xml)
+    mt_data = create_mt_data(entries)
+    save_file(out_file, mt_data)
+
+
 def get_xml(file_path):
     """
     指定されたファイルパスからXMLを取得して文字列として返す。
@@ -67,7 +83,6 @@ def parse(xml):
 
 
 MT_TEMPLATE = """\
---------
 AUTHOR: %(author)s
 TITLE: %(title)s
 STATUS: publish
@@ -91,6 +106,9 @@ EXCERPT:
 KEYWORDS:
 
 -----
+
+
+--------
 """
 
 
