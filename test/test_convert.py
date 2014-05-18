@@ -99,6 +99,9 @@ def test_create_mt_data_01():
         KEYWORDS:
 
         -----
+
+
+        --------
     """)
 
     actual = convert.create_mt_data(data)
@@ -142,25 +145,26 @@ def test_convert():
         ALLOW PINGS: 0
         PRIMARY CATEGORY: はてなダイアリー過去ログ
         CATEGORY: はてなダイアリー過去ログ
-
+        
         DATE: 07/14/2004 12:00:00 AM
         -----
         BODY:
         1つ目の記事1行目
         1つ目の記事2行目
         1つ目の記事3行目
-
+        
         -----
         EXTENDED BODY:
-
+        
         -----
         EXCERPT:
-
+        
         -----
         KEYWORDS:
-
+        
         -----
-
+        
+        
         --------
         AUTHOR: 7pairs
         TITLE: 2つ目の記事
@@ -170,27 +174,30 @@ def test_convert():
         ALLOW PINGS: 0
         PRIMARY CATEGORY: はてなダイアリー過去ログ
         CATEGORY: はてなダイアリー過去ログ
-
+        
         DATE: 07/15/2004 12:00:00 AM
         -----
         BODY:
         2つ目の記事1行目
         2つ目の記事2行目
         2つ目の記事3行目
-
+        
         -----
         EXTENDED BODY:
-
+        
         -----
         EXCERPT:
-
+        
         -----
         KEYWORDS:
-
+        
         -----
+
+
+        --------
     """)
 
-    assert_equal(data, actual)
+    assert_equal(expected, actual)
 
     os.remove('./test.txt')
 
