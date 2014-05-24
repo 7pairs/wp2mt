@@ -21,9 +21,9 @@ def execute(in_file, out_file):
     """
     # MovableType形式のテキストファイルを生成
     xml = get_xml(in_file)
-    entries = parse(xml)
-    mt_data = create_mt_data(entries)
-    save_file(out_file, mt_data)
+    for entry in parse(xml):
+        mt_data = create_mt_data(entry)
+        save_file(out_file, mt_data)
 
 
 def get_xml(file_path):
@@ -56,9 +56,6 @@ def parse(xml):
     @retrun: エントリ情報
     @rtype: list
     """
-    # 戻り値用リスト
-    retval = []
-
     # 引数をもとにBeautifulSoupオブジェクトを構築
     soup = BeautifulSoup(xml)
 
@@ -70,16 +67,13 @@ def parse(xml):
         category = item.find('category')
         post_date = item.find('wp:post_date')
         content = item.find('content:encoded')
-        retval.append({
+        yield {
             'author': creator.string,
             'title': title.string,
             'category': category.string,
             'date': datetime.datetime.strptime(post_date.string, '%Y-%m-%d %H:%M:%S'),
             'body': content.string,
-        })
-
-    # 構築したリストを返す
-    return retval
+        }
 
 
 MT_TEMPLATE = """\
@@ -112,7 +106,7 @@ KEYWORDS:
 """
 
 
-def create_mt_data(data_list):
+def create_mt_data(data):
     """
     エントリ情報の格納されたリストをもとにMovableType形式のインポート文字列を構築する。
 
@@ -121,13 +115,9 @@ def create_mt_data(data_list):
     @return: インポート文字列
     @rtype: str
     """
-    # 戻り値用
-    retval = ''
-
     # MovableType形式に変換
-    for data in data_list:
-        data['date'] = data['date'].strftime('%m/%d/%Y %I:%M:%S %p')
-        retval += MT_TEMPLATE % data
+    data['date'] = data['date'].strftime('%m/%d/%Y %I:%M:%S %p')
+    retval = MT_TEMPLATE % data
 
     # 構築した文字列を返す
     return retval
@@ -143,6 +133,6 @@ def save_file(file_name, data):
     @type data: str
     """
     # 文字列をファイルに保存
-    with open(file_name, 'w') as f:
+    with open(file_name, 'a') as f:
         f.write(data)
 

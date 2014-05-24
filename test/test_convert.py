@@ -32,34 +32,23 @@ def test_parse_01():
     """
     with open('./test/test_01.xml') as test_file:
         xml = test_file.read()
-    result = convert.parse(xml)
-    assert_equal(1, len(result))
-    assert_equal('7pairs', result[0]['author'])
-    assert_equal('1つ目の記事', result[0]['title'])
-    assert_equal('はてなダイアリー過去ログ', result[0]['category'])
-    assert_equal(datetime.datetime(2004, 7, 14, 0, 0, 0), result[0]['date'])
+    result = next(convert.parse(xml))
+    assert_equal('7pairs', result['author'])
+    assert_equal('1つ目の記事', result['title'])
+    assert_equal('はてなダイアリー過去ログ', result['category'])
+    assert_equal(datetime.datetime(2004, 7, 14, 0, 0, 0), result['date'])
     assert_equal(textwrap.dedent("""\
         1つ目の記事1行目
         1つ目の記事2行目
         1つ目の記事3行目
-    """), result[0]['body'])
-
-
-def test_parse_02():
-    """
-    引数に有効なXML文字列を指定したとき、その内容をすべてリストとして返すことを確認する。
-    """
-    with open('./test/test_02.xml') as test_file:
-        xml = test_file.read()
-    result = convert.parse(xml)
-    assert_equal(2, len(result))
+    """), result['body'])
 
 
 def test_create_mt_data_01():
     """
     引数に辞書を指定したとき、MovableType形式の文字列を返すことを確認する。
     """
-    data = [{
+    data = {
         'author': '7pairs',
         'title': '1つ目の記事',
         'category': 'はてなダイアリー過去ログ',
@@ -69,7 +58,7 @@ def test_create_mt_data_01():
             1つ目の記事2行目
             1つ目の記事3行目
         """),
-    }]
+    }
 
     expected = textwrap.dedent("""\
         AUTHOR: 7pairs
@@ -107,7 +96,7 @@ def test_create_mt_data_01():
     assert_equal(expected, actual)
 
 
-def test_save_file():
+def test_save_file_01():
     """
     引数に文字列とファイル名を指定したとき、文字列の内容をファイルに保存することを確認する。
     """
@@ -125,7 +114,7 @@ def test_save_file():
     os.remove('./test.txt')
 
 
-def test_convert():
+def test_convert_01():
     """
     WordPress形式のファイルをMovableType形式に変換することを確認する。
     """
