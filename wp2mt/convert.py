@@ -136,3 +136,13 @@ def save_file(file_name, data):
     with open(file_name, 'a') as f:
         f.write(data)
 
+
+if __name__ == '__main__':
+    # 引数をチェック
+    if len(sys.argv) != 3:
+        print('Usage: python %s input_file output_file' % sys.argv[0])
+        quit()
+
+    # スコアテーブルを出力
+    execute(sys.argv[1], sys.argv[2])
+
