@@ -1,2 +1,15 @@
-wp2mt
-=====
+# wp2mt
+
+[![Build Status](https://travis-ci.org/7pairs/wp2mt.svg?branch=master)](https://travis-ci.org/7pairs/wp2mt)
+[![Coverage Status](https://coveralls.io/repos/7pairs/wp2mt/badge.png?branch=master)](https://coveralls.io/r/7pairs/wp2mt?branch=master)
+
+## 概要
+
+WordPress形式のエクスポートファイルをMovableType形式のエクスポートファイルに変換します。
+
+## 使い方
+
+```
+python ./wp2mt/convert.py (入力ファイルのパス) (出力ファイルのパス) 
+```
+
