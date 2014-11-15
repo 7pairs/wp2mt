@@ -10,7 +10,7 @@ except ImportError:
     from exception import ParseError
 
 
-def execute(in_file, out_file):
+def execute(in_file: str, out_file: str):
     """
     WordPress形式のXMLをMovableType形式に変換する。
 
@@ -26,7 +26,7 @@ def execute(in_file, out_file):
         save_file(out_file, mt_data)
 
 
-def get_xml(file_path):
+def get_xml(file_path: str) -> str:
     """
     指定されたファイルパスからXMLを取得して文字列として返す。
 
@@ -47,7 +47,7 @@ def get_xml(file_path):
     return xml
 
 
-def parse(xml):
+def parse(xml: str):
     """
     指定されたxml文字列を解析し、エントリに関連する情報を格納した辞書のリストを返す。
 
@@ -106,7 +106,7 @@ KEYWORDS:
 """
 
 
-def create_mt_data(data):
+def create_mt_data(data: list) -> str:
     """
     エントリ情報の格納されたリストをもとにMovableType形式のインポート文字列を構築する。
 
@@ -123,7 +123,7 @@ def create_mt_data(data):
     return retval
 
 
-def save_file(file_name, data):
+def save_file(file_name: str, data: str):
     """
     文字列をファイルに保存する。
 
@@ -145,4 +145,3 @@ if __name__ == '__main__':
 
     # スコアテーブルを出力
     execute(sys.argv[1], sys.argv[2])
-
