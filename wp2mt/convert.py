@@ -12,14 +12,14 @@ class ParseError(Exception):
     """
 
 
-def execute(in_file: str, out_file: str):
+def execute(in_file, out_file):
     """
     WordPress形式のXMLをMovableType形式に変換する。
 
-    @param in_file: WordPress形式ファイルのパス
-    @type in_file: str
-    @param out_file: MovableType形式ファイルのパス
-    @type out_file: str
+    :param in_file: WordPress形式ファイルのパス
+    :type in_file: str
+    :param out_file: MovableType形式ファイルのパス
+    :type out_file: str
     """
     # MovableType形式のテキストファイルを生成
     xml = get_xml(in_file)
@@ -28,14 +28,14 @@ def execute(in_file: str, out_file: str):
         save_file(out_file, mt_data)
 
 
-def get_xml(file_path: str) -> str:
+def get_xml(file_path):
     """
     指定されたファイルパスからXMLを取得して文字列として返す。
 
-    @param file_path: ファイルパス
-    @type url: str
-    @return: XML文字列
-    @rtype: str
+    :param file_path: ファイルパス
+    :type file_path: str
+    :return: XML文字列
+    :rtype: str
     """
     # 指定されたファイルを開く
     xml = ''
@@ -49,14 +49,14 @@ def get_xml(file_path: str) -> str:
     return xml
 
 
-def parse(xml: str):
+def parse(xml):
     """
-    指定されたxml文字列を解析し、エントリに関連する情報を格納した辞書のリストを返す。
+    指定されたxml文字列を解析し、エントリに関連する情報を格納した辞書を返す。
 
-    @param html: XML文字列
-    @type html: str
-    @retrun: エントリ情報
-    @rtype: list
+    :param xml: XML文字列
+    :type xml: str
+    :return: エントリ情報
+    :rtype: Iterable[Dict[str, str]]
     """
     # 引数をもとにBeautifulSoupオブジェクトを構築
     soup = BeautifulSoup(xml)
@@ -108,14 +108,14 @@ KEYWORDS:
 """
 
 
-def create_mt_data(data: list) -> str:
+def create_mt_data(data):
     """
-    エントリ情報の格納されたリストをもとにMovableType形式のインポート文字列を構築する。
+    エントリ情報をもとにMovableType形式のインポート文字列を構築する。
 
-    @param data: エントリ情報
-    @type data: list
-    @return: インポート文字列
-    @rtype: str
+    :param data: エントリ情報
+    :type data: Dict[str, str]
+    :return: インポート文字列
+    :rtype: str
     """
     # MovableType形式に変換
     data['date'] = data['date'].strftime('%m/%d/%Y %I:%M:%S %p')
@@ -125,14 +125,14 @@ def create_mt_data(data: list) -> str:
     return retval
 
 
-def save_file(file_name: str, data: str):
+def save_file(file_name, data):
     """
     文字列をファイルに保存する。
 
-    @param file_name: ファイルパス
-    @type file_name: str
-    @param data: 保存する文字列
-    @type data: str
+    :param file_name: ファイルパス
+    :type file_name: str
+    :param data: 保存する文字列
+    :type data: str
     """
     # 文字列をファイルに保存
     with open(file_name, 'a') as f:
