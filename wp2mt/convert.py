@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import datetime
+import sys
 
 from bs4 import BeautifulSoup
 
-try:
-    from wp2mt.exception import ParseError
-except ImportError:
-    from exception import ParseError
+
+class ParseError(Exception):
+    """
+    文字列の解析に失敗したことを示す例外。
+    """
 
 
 def execute(in_file: str, out_file: str):
