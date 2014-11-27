@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import sys
 
 from bs4 import BeautifulSoup
 
@@ -129,13 +128,3 @@ def save_file(file_path, data):
     # 文字列をファイルに保存する
     with open(file_path, 'a') as f:
         f.write(data)
-
-
-if __name__ == '__main__':
-    # 引数をチェックする
-    if len(sys.argv) != 3:
-        print('Usage: python %s input_file output_file' % sys.argv[0])
-        quit()
-
-    # スコアテーブルを出力する
-    execute(sys.argv[1], sys.argv[2])
