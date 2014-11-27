@@ -6,14 +6,14 @@ import textwrap
 
 from nose.tools import *
 
-from wp2mt import convert
+from wp2mt.converter import convert
 
 
 def test_get_xml_01():
     """
     引数に有効なファイルパスを指定したとき、そのパスのXMLの内容を文字列として返すことを確認する。
     """
-    xml = convert.get_xml('./test/test_01.xml')
+    xml = convert.get_xml('./wp2mt/tests/test_01.xml')
     actual = ('1つ目の記事' in xml)
     assert_equal(True, actual)
 
@@ -22,7 +22,7 @@ def test_get_xml_02():
     """
     引数に無効なファイルパスを指定したとき、空文字列を返すことを確認する。
     """
-    xml = convert.get_xml('./test/not_exists.xml')
+    xml = convert.get_xml('./wp2mt/tests/not_exists.xml')
     assert_equal('', xml)
 
 
@@ -30,7 +30,7 @@ def test_parse_01():
     """
     引数に有効なXML文字列を指定したとき、その内容を辞書のリストとして返すことを確認する。
     """
-    with open('./test/test_01.xml') as test_file:
+    with open('./wp2mt/tests/test_01.xml') as test_file:
         xml = test_file.read()
     result = next(convert.parse(xml))
     assert_equal('7pairs', result['author'])
@@ -104,23 +104,23 @@ def test_save_file_01():
         保存する文字列アルよー。
         これは2行目アルよー。
     """)
-    convert.save_file('./test.txt', data)
+    convert.save_file('./wp2mt/tests/test.txt', data)
 
-    with open('./test.txt') as f:
+    with open('./wp2mt/tests/test.txt') as f:
         actual = f.read()
 
     assert_equal(data, actual)
 
-    os.remove('./test.txt')
+    os.remove('./wp2mt/tests/test.txt')
 
 
 def test_convert_01():
     """
     WordPress形式のファイルをMovableType形式に変換することを確認する。
     """
-    convert.execute('./test/test_02.xml', './test.txt')
+    convert.execute('./wp2mt/tests/test_02.xml', './wp2mt/tests/test.txt')
 
-    with open('./test.txt') as f:
+    with open('./wp2mt/tests/test.txt') as f:
         actual = f.read()
 
     expected = textwrap.dedent("""\
@@ -186,5 +186,4 @@ def test_convert_01():
 
     assert_equal(expected, actual)
 
-    os.remove('./test.txt')
-
+    os.remove('./wp2mt/tests/test.txt')
