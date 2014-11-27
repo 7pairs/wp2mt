@@ -13,7 +13,7 @@ def test_get_xml_01():
     """
     引数に有効なファイルパスを指定したとき、そのパスのXMLの内容を文字列として返すことを確認する。
     """
-    xml = convert.get_xml('./wp2mt/tests/test_01.xml')
+    xml = convert.read_file('./wp2mt/tests/test_01.xml')
     actual = ('1つ目の記事' in xml)
     assert_equal(True, actual)
 
@@ -22,7 +22,7 @@ def test_get_xml_02():
     """
     引数に無効なファイルパスを指定したとき、空文字列を返すことを確認する。
     """
-    xml = convert.get_xml('./wp2mt/tests/not_exists.xml')
+    xml = convert.read_file('./wp2mt/tests/not_exists.xml')
     assert_equal('', xml)
 
 
@@ -32,11 +32,11 @@ def test_parse_01():
     """
     with open('./wp2mt/tests/test_01.xml') as test_file:
         xml = test_file.read()
-    result = next(convert.parse(xml))
+    result = next(convert.parse_xml(xml))
     assert_equal('7pairs', result['author'])
     assert_equal('1つ目の記事', result['title'])
     assert_equal('はてなダイアリー過去ログ', result['category'])
-    assert_equal(datetime.datetime(2004, 7, 14, 0, 0, 0), result['date'])
+    assert_equal('07/14/2004 12:00:00 AM', result['date'])
     assert_equal(textwrap.dedent("""\
         1つ目の記事1行目
         1つ目の記事2行目
@@ -52,7 +52,7 @@ def test_create_mt_data_01():
         'author': '7pairs',
         'title': '1つ目の記事',
         'category': 'はてなダイアリー過去ログ',
-        'date': datetime.datetime(2004, 7, 14, 0, 0, 0),
+        'date': '07/14/2004 12:00:00 AM',
         'body': textwrap.dedent("""\
             1つ目の記事1行目
             1つ目の記事2行目
