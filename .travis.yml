@@ -10,7 +10,7 @@ install:
     - pip install coveralls
 
 script:
-    - nosetests --with-coverage --cover-package=wp2mt
+    - nosetests --with-coverage --cover-package=wp2mt.converter
 
 after_success:
     - coveralls
