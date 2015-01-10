@@ -1,7 +1,7 @@
 # wp2mt
 
 [![Build Status](https://travis-ci.org/7pairs/wp2mt.svg?branch=master)](https://travis-ci.org/7pairs/wp2mt)
-[![Coverage Status](https://coveralls.io/repos/7pairs/wp2mt/badge.png?branch=master)](https://coveralls.io/r/7pairs/wp2mt?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/7pairs/wp2mt.svg)](https://coveralls.io/r/7pairs/wp2mt?branch=master)
 
 ## 概要
 
