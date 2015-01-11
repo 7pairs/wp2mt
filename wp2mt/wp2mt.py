@@ -16,7 +16,8 @@ def main():
     """
     # 引数をチェックする
     if len(sys.argv) != 3:
-        print('Usage: wp2mt input_file output_file')
+        print('Usage:')
+        print('wp2mt <input_file> <output_file>')
         quit()
 
     # 変換を実行する
