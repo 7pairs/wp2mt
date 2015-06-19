@@ -1,16 +1,16 @@
 language: python
 
 python:
-    - 3.2
-    - 3.3
-    - 3.4
+  - 3.2
+  - 3.3
+  - 3.4
 
 install:
-    - pip install --use-mirrors -r requirements.txt
-    - pip install coveralls
+  - pip install --use-mirrors -r requirements.txt
+  - pip install coveralls
 
 script:
-    - nosetests --with-coverage --cover-package=wp2mt.converter
+  - nosetests --with-coverage --cover-package=wp2mt.converter
 
 after_success:
-    - coveralls
+  - coveralls
