@@ -52,5 +52,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# pyenv
+.python-version
+
 # IntelliJ IDEA
 .idea
+wp2mt.iml
