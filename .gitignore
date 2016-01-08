@@ -55,6 +55,5 @@ docs/_build/
 # pyenv
 .python-version
 
-# IntelliJ IDEA
+# PyCharm
 .idea
-wp2mt.iml
